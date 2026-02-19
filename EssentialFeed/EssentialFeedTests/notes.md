@@ -195,7 +195,10 @@ EndToEnd
     - Crea una cuenta prueba por app, fuertes passwords
 - Creamos nuevo TARGET para esto, para verificar tiempos exactos, mas precisos
     - no queremos todos los test corriendo aqui
+    - desde main view, + target, test bundle
     
+- OJO con el helper
+- Seleccionamos y en panel derecho agregamos a target nuvo
 
 = = =
 OJO con esto

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		C282C1582F3B96DA00E7A5D7 /* notes.md in Resources */ = {isa = PBXBuildFile; fileRef = C282C1572F3B96DA00E7A5D7 /* notes.md */; };
 		C282C15B2F3CB88F00E7A5D7 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C282C15A2F3CB87200E7A5D7 /* RemoteFeedLoader.swift */; };
 		C2D2B0312F46B374004DC06B /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
+		C2D2B0372F46B562004DC06B /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C209E1732F44BB3900E36BD5 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2D2B0372F46B562004DC06B /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
