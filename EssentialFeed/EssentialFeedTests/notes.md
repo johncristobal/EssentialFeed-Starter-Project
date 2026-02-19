@@ -212,3 +212,4 @@ Para probar todos los antes antes de lanzar a master branch
 - githubactions
 https://www.youtube.com/watch?v=HpitZtTDa3M&t=2s
 
+[![CI](https://github.com/johncristobal/EssentialFeed-Starter-Project/actions/workflows/CI.yml/badge.svg)](https://github.com/johncristobal/EssentialFeed-Starter-Project/actions/workflows/CI.yml)
