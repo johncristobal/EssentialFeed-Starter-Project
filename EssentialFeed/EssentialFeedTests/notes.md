@@ -178,6 +178,7 @@ Nombres - deben ser claros y expresar lo que estas haciendo
 =============================================================
 # random / end to end test 
 
+### Opciones de test, random, parallel, code coverage
 enabled random test in edit scheme
 - por si estuviesen anclados los tests, con esto cehcmoas que no haya y corran todos los test ok
 
@@ -189,7 +190,7 @@ code coverage
 - ayuda a ve rque todas las lineas de codigo se ejecutne
 - no es el goal, pero si se recomienda 
 
-EndToEnd 
+### EndToEnd Tests
 - OJO, podemos crear un url fake que devuelva la data esperada (proactividad)
     - podemos verifica si hay cambios en backends
     - Crea una cuenta prueba por app, fuertes passwords
@@ -205,5 +206,6 @@ OJO con esto
 Una y otra vez, el setup se lleva a un helper function
 
 ### CI scheme (continous integration)
+Creamos nuevo SCHEME
 Para probar todos los antes antes de lanzar a master branch
 
