@@ -182,16 +182,20 @@ enabled random test in edit scheme
 - por si estuviesen anclados los tests, con esto cehcmoas que no haya y corran todos los test ok
 
 enabled parallel test
-- para checar temas de velocidad
+- para checar temas de velocidad, mas rapido
 
 code coverage
 - para ver que todo el codigo esta optimizado, ver que tanto corre
+- ayuda a ve rque todas las lineas de codigo se ejecutne
+- no es el goal, pero si se recomienda 
 
 EndToEnd 
 - OJO, podemos crear un url fake que devuelva la data esperada (proactividad)
     - podemos verifica si hay cambios en backends
-- Creamos nuevo shceme para esto, para verificar tiempos exactos, mas precisos
+    - Crea una cuenta prueba por app, fuertes passwords
+- Creamos nuevo TARGET para esto, para verificar tiempos exactos, mas precisos
     - no queremos todos los test corriendo aqui
+    
 
 = = =
 OJO con esto
