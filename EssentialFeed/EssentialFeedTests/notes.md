@@ -209,7 +209,26 @@ Una y otra vez, el setup se lleva a un helper function
 Creamos nuevo SCHEME
 Para probar todos los antes antes de lanzar a master branch
 
-- githubactions
+# githubactions
 https://www.youtube.com/watch?v=HpitZtTDa3M&t=2s
 
+- Creamos carpeta .github/workflows/ci.yml en root del proyecto
+- Adecuadmos instruccinoes (ver archivo)
+- hacemos push a master, empiezan a correr test
 [![CI](https://github.com/johncristobal/EssentialFeed-Starter-Project/actions/workflows/CI.yml/badge.svg)](https://github.com/johncristobal/EssentialFeed-Starter-Project/actions/workflows/CI.yml)
+
+=============================================================
+# thread sanitizer
+- ayuda a ver si hay data races at runtime (muchos hilos ingresando al mismo endpoint al mismo tiempo) 
+
+- habilitamos opcion en edit schema - diagnostics
+stopIncetrceptingRequests() = se llama en main en el tearDown
+Mientras otro hilo intenta acceder a stub data compartido
+
+    makeSUT().get(from: url) { _ in }
+En esta linea, no estamos esperando que se termine el request, solo que se llame
+
+- OJO
+esto puede causar inremente en CPU de 2 a 20, 
+- NO SE recomienda activarlo, solo en CI para validar tests
+
