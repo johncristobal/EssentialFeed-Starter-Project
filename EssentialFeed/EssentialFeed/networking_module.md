@@ -232,3 +232,19 @@ En esta linea, no estamos esperando que se termine el request, solo que se llame
 esto puede causar inremente en CPU de 2 a 20, 
 - NO SE recomienda activarlo, solo en CI para validar tests
 
+=============================================================
+# wrong reachability
+validar si tenemos conexion o no y dar el siguiente paso
+
+- Desde ios 11, tenemos la flag waitsForConnectivity para esperar cuano haya conexino
+- definir timeout para definir cuando termina
+- delegate para saber si hay conexion
+- request.allowsCellularAccess para conexionss con celular data
+
+### ahroa en iOS 13+
+- allowsExpensiveNetworkAccess - si se usa una interfaz de red si el sistema lo considera costoso
+- allowsConstrainedNetworkAccess - saber si se usa la red si el usuario especifico Low data mode
+
+No bloquees nada basado en pre-flight checks
+
+
