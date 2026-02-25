@@ -32,6 +32,10 @@ Woooow, existe un URLCache ya definido, donde podemos guardar data de la session
 #  Decoupling business frmo logic framework
 
 - Separar business rules de frameworks - DependencyInversion
+***
+Dependency Inversion. Instead of depending on framework requirements/details, we make the framework depend on our needs.
+***
+
 - Creamos clase para simular framework:
 * probamos las interfaces sin ningun framework (coredata, codable)
     FeedStore {
@@ -41,3 +45,36 @@ Woooow, existe un URLCache ya definido, donde podemos guardar data de la session
 - podemos agregar cambios a commit recientes:
     git add .
     git commit --amend --no-edit
+
+- agregamos enum para simplicaficar proceso
+- una vez mas con el metodo spy
+- OJO con el arreglo de enum (aqui me perdi un poco)
+private class FeedStoreSpy: FeedStore {
+    enum ReceivedMessage: Equatable {
+        case deleteCachedFeed
+        case insert([FeedItem], Date)
+    }
+
+    private(set) var receivedMessages = [ReceivedMessage]()
+
+- TIPS
+* The Single Responsibility Principle (SRP) is a great guideline. Ask yourself: are all methods related and responsible for one and only one responsibility 
+
+* Interface Segregation Principle (ISP): no client should be forced to depend on methods it does not use.
+
+=============================================================
+#  Modules
+
+Controllers - what
+Frameworks - how
+OJO
+- si muchas flechas aputan a un componente, que pasa is cambia?
+- un cambio en el, desencadenaria muchos mas 
+
+- Temas de memoria
+Probamos cuando se inserta o se borra y el Loader se va a nil
+
+=============================================================
+#  Resolviendo el high-coupling - data transfer model
+
+
