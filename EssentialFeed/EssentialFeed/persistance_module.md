@@ -77,4 +77,27 @@ Probamos cuando se inserta o se borra y el Loader se va a nil
 =============================================================
 #  Resolviendo el high-coupling - data transfer model
 
+Queremos componentes descentralizados 
+- Cada modelo para su dominio 
+Por eso creamos un FeedItem => LocalFeedItem === DTO
+DTO = data transfer object 
+- Si un modeo cambia, no afecta al local
+- Creamos mappers para match models
 
+Creamos capas en caso que backend cambie 
+
+- - -
+### Alcance conformista
+unico modelo para todo -> puede ser un error
+Un cambio y se mueve todo
+
+### Naming
+
+Ver un producto tecnicamente y no
+Item = iamge, ads or videos
+Para nosotros, primero solo imagenes 
+
+- INTERESANTE:
+private Array extensions for translating/mapping between model representations
+
+testing only through the public interfaces:
