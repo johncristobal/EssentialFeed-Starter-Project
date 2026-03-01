@@ -101,3 +101,50 @@ Para nosotros, primero solo imagenes
 private Array extensions for translating/mapping between model representations
 
 testing only through the public interfaces:
+
+=============================================================
+# DRY principle, Tiny DSLs
+
+Interesante: hace un duplciado de funcion, pero en un contexto diferente
+Podemos usar lo mismo para diferentes contextos
+
+- este es el camino...
+sut.load { images, error 
+}
+
+- pero, podemos simplicar
+sut.load { result 
+}
+
+haciendo uso de los protocolos
+
+### typealias
+proteger codigo de cambios futuros
+
+### expect function
+entendiendo un poco mas el expect function to send expected result y comparar con receive result 
+switch interno para hacer matches
+
+### enum
+para cuando tienes mas de un caso, son buenos para comparar muchos casos
+
+### WHAT
+case let ... where method()
+woooow, validar case con una funcion interna xD
+
+### DSL (Domain Specific Language) 
+detalles de implementacion 
+test-specific DSL (Domain Specific Language) making the tests more flexible as we are free to reuse/change/replace the logic within the Date extension without breaking the tests.
+
+### OJO con calcuclar fechas
+un calculo de 60*60*24*7 puede ser error para todos los dias
+ademas de las zonas horarios de diferetes devs en el mundo
+- Dejemoslo en Apple Calendar 
+
+### Triangular
+Si el esceneario es menos de 7 dias...minimo
+- pero si es mas de 7
+- si es justo 7
+
+Como devs, nos toca validar todo escenario => PRACTIVIDAD
+
