@@ -284,3 +284,96 @@ de sevendays - expired
 
 ### DSL domain speficic language
 reglas fijas, un metodo para manejar los 7 dias como fecha de expiracion
+
+=============================================================
+# Multithread env
+
+### circulo verde con rojo
+Core - sin side effects
+Logica del negocio - high level
+- LocalFeedLoader = core logic 
+
+Limite del circulo = habilita la dependency inversion entre el core logic y FeedStore implementation
+
+- Ejemplo
+class UserViewModel {
+    private let apiService = ApiService() // ❌ tightly coupled
+
+- Mejor, usamos protocol para definir 
+protocol UserService {
+    func fetchUsers() -> [String]
+}
+- Definimos el service
+class ApiService: UserService {
+    func fetchUsers() -> [String] {
+        return ["John", "Mary"]
+    }
+}
+- Inyectamos el service
+class UserViewModel {
+    private let userService: UserService
+    
+    init(userService: UserService) {
+        self.userService = userService
+    }
+    
+    func loadUsers() -> [String] {
+        return userService.fetchUsers()
+    }
+
+Vamos inyectando el service
+__Definition__
+A boundary component, such as a protocol or closure, acting as an abstraction to guarantee the high-level component doesn’t depend on low-level details.
+
+FeedStore - Codable, Realm, CoreData...
+low level component
+
+### Recuerda
+Antes de tirar codigo - checa bien que necesitas
+Checa todos los caminos, posibles rutas, race conditions
+Eso deende de nosotrs
+
+### Threads - cuidado
+Si queremos insertar y eliminar al mismo tiempo
+Si dos quieren insertar, mucho ojo
+
+### contracts
+casos de usos - ayudan al equipo a trabajar
+incluso con el backend, definiendo data podemos empezar a trabajar sin el
+
+=============================================================
+# Codable system / measuring tests
+
+### TDD rules
+vemos un error, checamos compilador, corregimos y seguimos
+"Make it work. Make it right. Make it fast. In that order."—Kent Beck
+
+### Remember
+expectatino block para simular network (lo que suele tardar)
+    let exp = expectation(description: "Wait for cache retrieval")
+    ...
+    wait(for: [exp], timeout: 1.0)
+
+### Codable
+Implementa ambos tnato encodable y decodable
+PERO OJO
+Codable se coloca porque el framework lo requiere,
+sin embargo el modelo LocalFeedImage no deberia ser afectado por ello, es logica de negocio
+
+OJO
+Al introducitr IO en los tests (Escribir en archivo) afectamos latencia de los test, y puede empeorar, hay que tener cuidado
+
+* Creamos mappers *
+
+### sideeffects
+En los tests, al ejecutar uno, altera la app y puede que otro test ya no pase
+
+- tearDown y setUp metodos lo podemos llamar para limpiar cache
+setup se llama antes de cada test
+teardown despues de cada test
+
+
+### inyect param
+Pasar el url como param nos ayuda a que otros usuarios puedan probar esta parte, usando cada uno su pripoia url
+
+
