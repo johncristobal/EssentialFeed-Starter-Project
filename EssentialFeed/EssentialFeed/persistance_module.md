@@ -421,3 +421,42 @@ Value type = se pasan como copias a cada instancia con una copia unica
 
 ### ojo
  we should be aware of changes in performance as they can quickly add up and become a bottleneck.   
+
+=============================================================
+# Protocol vs Class
+
+### Extensiones ancladas
+Definimos una extension y usamos where para ancalrla a un tipo especifico
+
+extension FeedStoreSpecs where Self:XCtestCase{
+
+}
+
+### Liskov substitution principle
+LSP
+los objetos se pueden reemplazar con instancias de sus subtipos sin alterar programa
+
+### Interface Segreagation principle
+ISP
+los clientes no deberian ser forzados a depender de metodos que no use
+
+### Truco XCode
+Click en icono superior izquierdo, cuadritos
+- generate interface = genera un protocolo con las funciones definidas en el archivo
+
+### class vs protocol
+las clases solo pueden heredar de una clase, por tanto no son recomendadas para heredar 
+
+Compositions 
+- comportamienti complejo en simples objetos
+- Has-a = tiene una, en vez de "es una"
+
+Swift usa protocols para esto
+Una clase puede heredar muchos protocols
+
+    typealias FailableFeedStoreSpecs = FailableRetrieveFeedStoreSpecs & FailableInsertFeedStoreSpecs & FailableDeleteFeedStoreSpecs
+
+Cmobinar protocolos
+
+
+
