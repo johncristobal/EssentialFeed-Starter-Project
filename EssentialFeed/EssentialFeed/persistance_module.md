@@ -377,3 +377,47 @@ teardown despues de cada test
 Pasar el url como param nos ayuda a que otros usuarios puedan probar esta parte, usando cada uno su pripoia url
 
 
+=============================================================
+# Arrow antipattern / delete models
+
+### cuando el codigo empieza a verse como flecha
+\
+/
+esto es un antipattern, mucho codigo, dificil de leer
+
+Convertimos async en sync methods
+    func asyncFunction(completion: @escaping (ReturnType) -> Void)
+a
+    func syncFunction() -> ReturnType
+
+se lee mejor
+test mejor para escribir, mantener, mas flexibles
+eliminamos arrow shape code
+
+### Liskov substitution principle
+Types deberian ser reemplazables con instancias de sus subtipos sin alterar programa 
+
+### try catch
+Ojo con estos, en los catch ayuda a validar y lanxar completion con error
+
+=============================================================
+# Thread safe - dispatchQueue / avoid race conditions
+
+### DisptachQueue
+al agregar llamadas aqui, la ejecucion se hace inpredecible
+- No sabemos el orden que se llaman
+
+### serialqueue
+Aseguramos que en el queue todo los jobs trabajen en serial
+
+### dejamos que el cliente decida que hilo usar
+- interesante uso de comentarios para visualizar documentation
+
+### race conditinos
+ if two threads try to mutate the same instance data at the same time, all types of race conditions can occur (data corruption, crashes…).
+mutable data (reference) - race conditions
+So
+Value type = se pasan como copias a cada instancia con una copia unica 
+
+### ojo
+ we should be aware of changes in performance as they can quickly add up and become a bottleneck.   
