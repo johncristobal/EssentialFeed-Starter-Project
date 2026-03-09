@@ -456,7 +456,20 @@ Una clase puede heredar muchos protocols
 
     typealias FailableFeedStoreSpecs = FailableRetrieveFeedStoreSpecs & FailableInsertFeedStoreSpecs & FailableDeleteFeedStoreSpecs
 
-Cmobinar protocolos
+Cmobinar protocolos, cada uno con archivos especificos y nombres adoc
 
+=============================================================
+# Core Data overview / reusalbe protocols
+
+Separamos framekwoek del negocio
+- OJO con los modelos, hay que empatarlos (negocio  framekwork)
+
+Para tests, tmb tenemos que tener un bundle par CoreData
+- Una vez mas, inyectamos bundle para que sea independiente
+
+/dev/null
+- no guarda en dsico, mas rapido para pruebas 
+
+EssentialFeed/EssentialFeed/Feed Cache/Infrastructure/CoreData/FeedStore.xcdatamodeld/FeedStore.xcdatamodel/contents
 
 
