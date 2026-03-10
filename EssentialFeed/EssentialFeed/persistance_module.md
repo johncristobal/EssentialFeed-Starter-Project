@@ -470,6 +470,27 @@ Para tests, tmb tenemos que tener un bundle par CoreData
 /dev/null
 - no guarda en dsico, mas rapido para pruebas 
 
-EssentialFeed/EssentialFeed/Feed Cache/Infrastructure/CoreData/FeedStore.xcdatamodeld/FeedStore.xcdatamodel/contents
+=============================================================
+# Unit vs Integration tests
 
+### Unit (isolated) test
+- primary feedback
+- deben ser rapidos - se corren varias veces al dia, no deben afectar productivida
+- en cada mini cambio
+- confidence
+
+- usamos cache/memoria para tests mas rapidos
+- son MAS IMPORTANTES unit test (podemos probar erorres, happy paths)
+
+### integration
+- confidence that componentes colaboran bien conjunto
+- pueden ser mas lentos, no los corras tan seguido
+- deben correr en el CI pipeline (continous integration)
+
+- usamos instancias de produccion, fisical URL
+- creamos diferentes SUT como si fueran diferentes instacas (usuarios)
+
+- No uasmos mocks, test doubles (no caminos de error)
+    - seria mas trabajo y menos mantenible tener casos de error en estos tests
+    
 
