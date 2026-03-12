@@ -493,4 +493,49 @@ Para tests, tmb tenemos que tener un bundle par CoreData
 - No uasmos mocks, test doubles (no caminos de error)
     - seria mas trabajo y menos mantenible tener casos de error en estos tests
     
+=============================================================
+# Recap
+
+### mutable state
+Usa immutable state donde mas puedas
+es decir mas let que var
+
+### pasos pequenos pero eficaces 
+sabes mas rapido si vas mal o no
+trabajar en modulos independientes
+que el codigo se mantenga limpip y mantenible
+CI servers para chequeos continuos de tests
+
+### cambios
+El cambio de items a images feed cambio en muchos lados
+pero vale la pena si es con el fin de enteder mejor el codigo
+
+=============================================================
+# Bonus
+
+### Swift.Result in swift 5
+
+Pasamos de esto... 
+    public enum LoadFeedResult {
+        case success([FeedImage])
+        case failure(Error)
+    }
+
+a esto
+    public typealias LoadFeedResult = Result<[FeedImage], Error>
+ocupamos el standar de swift para manejar dara y error
+
+MEJOR AUN
+colocamos el result dentro del procol para mejor entendimiento y claridad
+
+### poder de map
+Firebase.userFriends()
+    .map { $0.name } // [FirebaseUserFriend] -> [String]
+    .map { $0.trimmingCharacters(in: .whitespaces) } // [String] -> [String]
+    .map { Friend(name: $0) }  // [String] -> [Friend]
+
+### swift optional
+Maneja estados: some y none
+podemos simplicar este proceso para cuando tengasmo cache y no
+
 

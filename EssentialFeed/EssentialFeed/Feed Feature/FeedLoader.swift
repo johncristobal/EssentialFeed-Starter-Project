@@ -4,11 +4,17 @@
 
 import Foundation
 
-public enum LoadFeedResult {
-	case success([FeedImage])
-	case failure(Error)
-}
+// cambio 1
+//public enum LoadFeedResult {
+//	case success([FeedImage])
+//	case failure(Error)
+//}
+
+// cambio 2
+//public typealias LoadFeedResult = Result<[FeedImage], Error>
 
 public protocol FeedLoader {
-	func load(completion: @escaping (LoadFeedResult) -> Void)
+    // cambio 3
+    typealias Result = Swift.Result<[FeedImage], Error>
+	func load(completion: @escaping (Result) -> Void)
 }
