@@ -22,6 +22,28 @@ Podemos agregar otros platforms para que se compile
 Donde alojaremos el EssentialFeediOS para el prouecto iOS
 OJO - creamos CI_ios y CI_macos para separar pipelines, no se pueden mezclar 
 
+==================================================
+# MVC
+
+### OJO una opantalla puede contener varios MVCs
+
+### Teomporal coupling
+cuando invocas miembros de una clase una tras otra, en acoplan tmeporalmente
+
+EN TEST - combina todo en un solo test
+ojo con los mensjaes, deben ser precisos
+
+### Refresh
+Si cambiamos refresh por button o barra, tendremos que reescribir el test
+so 
+DSL func simulateUserInitiatedFeedReload()
+
+Solo se preocupe por el refreshi, no por como lo hace
+
+To simulate a ‘tap’ on a UIButton, you can use the .touchUpInside event:
+
+==================================================
+# Tests images request / inside-out vs outside-in dev
 
 
 
