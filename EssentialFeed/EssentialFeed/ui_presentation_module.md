@@ -109,6 +109,43 @@ Single Responsibility (SRP).
 Making sure to follow these guidelines will give you the freedom to extend your system with the minimum cost for changing it.
 
 
+==================================================
+# Refactor massive VC - composers
+
+### Mini MVC
+FeedViewContrller:
+- refreshcontrol
+- tableview - images
+- iamgecell
+- image url
+
+### FeedRefreshViewController
+lazy var para inicializar contrl
+inyectamos dependencia - feedLoader
+enviamos closure para regresar data 
+
+### dependencias
+Al crear otros controllers para manejar refresh y cell, debemos manejar estos componentes en otro componente para que no crezca las deendencias 
+
+- podria sera un Factory, pero serian mas dependencia
+- So...
+tableModel - ya no sera mas de feedimage, ahora de cells
+dentro de cellscontrollers, manejamos el resto
+
+al obtener las imagenes, las pasamos a cells
+
+En el init, crea instancia para refresh y para cells...
+So - CREAMOS COMPOSER
+- adapt pattern
+- te ayuda aconectar unmatching apis
+- reglas
+Composers should only be used in the Composition Root
+Only Composers can use other Composers
+
+Este  componente crea el refresh y las celdas
+- crea un FeedViewContrller que piede ser llamado desde cualqueir lado
+
+
 
 
 

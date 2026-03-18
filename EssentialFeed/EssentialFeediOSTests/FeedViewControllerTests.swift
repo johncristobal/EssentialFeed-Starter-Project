@@ -245,7 +245,7 @@ final class FeedViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedViewController(feedLoader: loader, imageLoader: loader)
+        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
@@ -342,10 +342,24 @@ final class FeedViewControllerTests: XCTestCase {
 }
 
 private extension FeedViewController {
+    func replaceRefreshingControlWithFakeiOS17Support() {
+        let fake = FakeRefreshContol()
+        refreshControl?.allTargets.forEach { target in
+            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { action in
+                fake.addTarget(target, action: Selector(action), for: .valueChanged)
+            }
+        }
+        
+        refreshControl = fake
+    }
+}
+
+private extension FeedViewController {
     
     func simulateApperaance() {
         if !isViewLoaded {
             loadViewIfNeeded()
+            refreshController?.replaceRefreshControlWithFakeForiOS17Support()
             replaceRefreshingControlWithFakeiOS17Support()
         }
         
@@ -471,26 +485,4 @@ private extension UIImage {
 //        UIGraphicsEndImageContext()
 //        return img!
     }
-}
-
-private extension FeedViewController {
-    func replaceRefreshingControlWithFakeiOS17Support() {
-        let fake = FakeRefreshContol()
-        refreshControl?.allTargets.forEach { target in
-            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { action in
-                fake.addTarget(target, action: Selector(action), for: .valueChanged)
-            }
-        }
-        
-        refreshControl = fake
-    }
-}
-
-
-private class FakeRefreshContol: UIRefreshControl {
-    private var _isRefreshing: Bool = false
-    
-    override func beginRefreshing() { _isRefreshing = true }
-    override func endRefreshing() { _isRefreshing = false }
-    override var isRefreshing: Bool { _isRefreshing }
 }
