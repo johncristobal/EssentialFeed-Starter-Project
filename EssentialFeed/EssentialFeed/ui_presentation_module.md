@@ -45,5 +45,70 @@ To simulate a ‘tap’ on a UIButton, you can use the .touchUpInside event:
 ==================================================
 # Tests images request / inside-out vs outside-in dev
 
+### DSL - domain specific language
+Separamos test de implementacion, asi podemos cambiar mas adelante si queremos
+- de tableview a collectionview por ejemplo
+
+### FeedImageDataLoader
+loadImageData(from url:URL)
+- Separamos la logica del viewcontroller de cualquier implementacion
+- open/closed principle - sin modificar controller podemos modificar metodo
+
+### Dependency injection + interface segragation principle
+pasamos dos instancias diferentes para ambos protocolos
+
+- deberiamos tener solo un metodo por protocol = interface segregation interface
+
+### new task protocol
+task can be canceled
+
+public protocol FeedImageDataLoaderTask {
+    func cancel()
+}
+
+public protocol FeedImageDataLoader {
+    typealias Result = Swift.Result<Data, Error>
+
+    func loadImageData(from url: URL, completion: @escaping (Result) -> Void) -> FeedImageDataLoaderTask
+}
+Nos ahorramos el metodo de cancel, y lo dejamos en uno solo
+
+### crear imagen demo
+    static func make(withColor color: UIColor) -> UIImage {
+Creamos una imagen de prieba (de 1x1) para hacer pruebas 
+
+### inside-out
+codificar de adentro hacia afuera
+FeedLoader and FeedImage, modelo y protocolo = CORE y liego hacia afuera
+
+### outside-in
+disena la vista y ve definiendo el resto
+FeedViewController -> FeedIamgeDataLoader
+
+### OJO
+Keeping too many responsibilities in a single MVC Controller is an anti-pattern usually known as Massive View Controller.
+- share the complexity to many places instead of one.
+
+## open closed principle in FeedViewController
+EL comportamiento de un componente puede ser abierto extender sin hacer cambios en el __extension__
+Si fuera URLSession - mucho por probar... cache, in memory, loggin, network
+
+<FeedImageDataLoader> - con este protocolo NO acoplamos nada directamente
+Carga la imagen como desee
+Puede ser mas de uno
+CachedFeedImageDataLoader --->FeedImageDataLoader
+LogginFeedImageDataLoader --->FeedImageDataLoader
+
+FeedViewController - abierto a extension y cerrado a modificar
+
+Open Closed Principle (OCP) as a result of respecting other principles such as 
+the Interface Segregation (ISP), 
+Liskov Substitution (LSP), 
+Dependency Inversion (DIP) and 
+Single Responsibility (SRP). 
+Making sure to follow these guidelines will give you the freedom to extend your system with the minimum cost for changing it.
+
+
+
 
 
