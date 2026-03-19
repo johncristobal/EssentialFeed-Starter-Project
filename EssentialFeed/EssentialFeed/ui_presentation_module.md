@@ -145,7 +145,54 @@ Only Composers can use other Composers
 Este  componente crea el refresh y las celdas
 - crea un FeedViewContrller que piede ser llamado desde cualqueir lado
 
+==================================================
+# MVVM - reducing boilerplate / swift generics 
 
+Tenemos mucha funcionalidad en los controllers
+- Si tuvieramos que agrear wathckit, se copiaria y pegaria mucho codigo
+- Aqui entra MVVM
+- it’s common for iOS teams to use frameworks like RxSwift or Combine.
 
+* Creado por microsoft para eliminar boilerplate entre views y models
+Model View Binder
+* Todo el manejo del __estado__ vive en el ViewModel - queda reusable
+* podemos usar el ViewModel para multiples platforms
+    * ViewModel no debe depender de UIKit
+    
+* El ViewModel no tiene una referencia al view, como lo tiene el MVC
+    
+    
+* tambien ayuda como capa para transformar data
+- Date a String 
 
+* si te ves duplicando codigo entre controllers, o transormando valores en contrllers
+    - muevelo a un platform agnostic viewmodel
+    On the other hand, it’s recommended for ViewModels to be platform-and-framework-agnostic so that you can reuse them on __multiple platforms__.
 
+stateful and stateless
+
+### observers
+typealias Observer<T> = (T) -> Void
+So
+    var onLoadingStateChange: ((Bool) -> Void)?
+    . . . 
+    var onLoadingStateChange: Observer<Bool>?
+
+Tmb
+    var onFeedLoad: (([FeedImage]) -> Void)?
+    . . .
+    var onFeedLoad: Observer<[FeedImage]>?
+
+### generics
+final class FeedImageViewModel<Image> {
+    
+    private let imageTranformer: (Data) -> Image?
+}
+Dejamos el viewmodel generico y asi podemos convertir la data en cualquier image type
+
+final class FeedImageCellContrller {
+    let viewModel: FeedImageController<UIImage>
+}
+la dependencia de uikit queda en el controller
+
+To decouple the Presentation layer from UIKit types, we defined a generic Image type and used Dependency Injection (construction injection) to pass a transformation closure to convert Data into any Image type.
