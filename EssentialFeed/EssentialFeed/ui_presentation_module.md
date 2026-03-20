@@ -196,3 +196,51 @@ final class FeedImageCellContrller {
 la dependencia de uikit queda en el controller
 
 To decouple the Presentation layer from UIKit types, we defined a generic Image type and used Dependency Injection (construction injection) to pass a transformation closure to convert Data into any Image type.
+
+==================================================
+# MVP - proxy pattern
+
+- separar ui from presentation logic
+- reusable cross-platforms presnetaton layers
+
+MVC - controller tiene una referencia a la vista (fuerte)
+MVVM - el viewmodel notifica cambios a la vista (medio) - reactivo
+MVP 
+- el presenter tiene un protocolo que hace vista abstracta y coencta con el view - two way communicationg
+- tranformar data y la manda en un struct (viewmodel, viewdata)
+
+protocol FeedView {
+    func display(feed:[FeedImage])
+}
+
+final class FeedPresenter {
+. . .
+    var feedView: FeedView?
+. . .
+    self.feedview.display(feed: feed)
+}
+
+- PERO OJO
+Deberia pasar viewmodel, en casi de agregar mas items, no rompes el protocol
+- solo guarda data
+
+### adapter
+Creamos capa para manejar un solo camino, no two wayss
+
+### interface segregation principle
+Client no deben forzarse a usar o depender de interfaces que no usen
+
+❌ protocol Worker {
+    func work()
+    func eat()
+}
+
+✅
+protocol Workable {
+    func work()
+}
+
+protocol Eatable {
+    func eat()
+}
+
