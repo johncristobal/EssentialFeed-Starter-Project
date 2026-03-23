@@ -11,10 +11,7 @@ import EssentialFeediOS
 
 extension FeedViewControllerTests {
     class LoaderSpy: FeedLoader, FeedImageDataLoader {
-//        private var completions = [(FeedLoader.Result) -> Void]()
         
-//        var loadCallCount: Int {
-//            return completions.count
         private var feedRequests = [(FeedLoader.Result) -> Void]()
         
         var loadFeedCallCount: Int {
@@ -22,7 +19,6 @@ extension FeedViewControllerTests {
         }
         
         func load(completion: @escaping (FeedLoader.Result) -> Void) {
-//            completions.append(completion)
             feedRequests.append(completion)
         }
         
@@ -63,9 +59,5 @@ extension FeedViewControllerTests {
             let error = NSError(domain: "an error", code: 0)
             imageRequests[index].completion(.failure(error))
         }
-        
-//        func completeFeedLoading(at index: Int) {
-//            completions[index](.success([]))
-//        }
     }
 }

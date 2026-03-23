@@ -244,3 +244,11 @@ protocol Eatable {
     func eat()
 }
 
+==================================================
+# Storybard...
+
+Cambiamos del codigo al storyboard, ahora aqui se maneja los aoutles, no mas codigo
+
+- uirefresh vive en el stoyboard
+
+
