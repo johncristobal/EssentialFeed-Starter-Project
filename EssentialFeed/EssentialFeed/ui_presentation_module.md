@@ -267,3 +267,22 @@ You can access your Localized Strings via the Foundation Bundle APIs or NSLocali
 - NSLocalizedString
     - retorna el valor de la llave si no tiene data 
     - o el value por defecto
+
+==================================================
+# Decoration pattern
+
+### DispatchQueue.main.async { [weak self] 
+}
+manejamos weak self para memory leak
+
+### presenter
+para no andar repitieno codigo, el presenter puede ser mejor para manjear memoria y threads
+- OJO, el presenter es framework agnostic, UIkit y dispatch no entran, so
+
+### composer
+Aqui es el mejor ligar,pero ocupamos Decorator pattern
+OPEN CLOSE P 
+- Agregmoas comportamiento a una instnacia manteniendo la interfaz
+- podemos hacerlo generic para cualqioer componente que ocupe threads
+
+EssentialFeed/EssentialFeediOS/Feed UI/Composers/FeedLoaderPresentationAdapter.swift
