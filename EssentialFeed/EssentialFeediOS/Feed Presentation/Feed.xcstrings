@@ -1,0 +1,29 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "FEED_VIEW_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Το Feed μου"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My feed"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meu Feed"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

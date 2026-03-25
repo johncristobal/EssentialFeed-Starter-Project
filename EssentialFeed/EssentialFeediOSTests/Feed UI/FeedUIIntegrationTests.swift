@@ -10,7 +10,15 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 
-final class FeedViewControllerTests: XCTestCase {
+final class FeedUIIntegrationTests: XCTestCase {
+    
+    func test_feedView_hasTitle() {
+        let (sut, _) = makeSUT()
+        
+        sut.simulateApperaance()
+        
+        XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
+    }
     
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
@@ -243,7 +251,7 @@ final class FeedViewControllerTests: XCTestCase {
     
     func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
         let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
+        sut.simulateApperaance()
         loader.completeFeedLoading(with: [makeImage()])
 
         let view = sut.simulateFeedImageViewNotVisible(at: 0)

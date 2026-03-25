@@ -251,4 +251,19 @@ Cambiamos del codigo al storyboard, ahora aqui se maneja los aoutles, no mas cod
 
 - uirefresh vive en el stoyboard
 
+==================================================
+# String localized
 
+### Title string creation must be in presenters
+- aqui como usamos mvp, se queda en el composer
+- el view solo se encarga de render lo que se le manda
+
+### si el titulo cambia...
+- utiliza un protocolo y viewmodel para enviar el titulo cuando sea respectivo
+
+### strings
+You can access your Localized Strings via the Foundation Bundle APIs or NSLocalizedString function.
+
+- NSLocalizedString
+    - retorna el valor de la llave si no tiene data 
+    - o el value por defecto
