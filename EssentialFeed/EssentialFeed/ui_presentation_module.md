@@ -286,3 +286,9 @@ OPEN CLOSE P
 - podemos hacerlo generic para cualqioer componente que ocupe threads
 
 EssentialFeed/EssentialFeediOS/Feed UI/Composers/FeedLoaderPresentationAdapter.swift
+
+==================================================
+# Legacy code - TDD
+
+Recomienda ampliamente TDD para ir pasando de codigo a tests
+
