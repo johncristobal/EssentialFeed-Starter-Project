@@ -17,3 +17,16 @@ Listo, reiniciamos xcode con el worksapce, ya tiene todo
 
 Ahora
 - En la app, agregamos feed y feedios frameworks
+ya podemos utilizar lo que tenemos aqui en la app
+
+==================================================
+### composite pattern
+
+==================================================
+### Interception
+
+==================================================
+### high level ui test / launch args
+
+==================================================
+### fast integration tests
