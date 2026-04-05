@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public final class CodableFeedStore: FeedStore {
     private struct Cache: Codable {
         let feed: [CodableFeedImage]
@@ -89,3 +89,4 @@ public final class CodableFeedStore: FeedStore {
         }
     }
 }
+*/
