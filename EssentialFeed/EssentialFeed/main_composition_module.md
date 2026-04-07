@@ -19,8 +19,29 @@ Ahora
 - En la app, agregamos feed y feedios frameworks
 ya podemos utilizar lo que tenemos aqui en la app
 
+KEEP
+- no se porque, pero la version del db se regresaba cada que cierro la app
+ojo con eso
+
 ==================================================
 ### composite pattern
+Compose object to share common interface
+try remote and if fails try local
+FeedLoader - comparten ambos
+
+OJO para las imagenes
+primero checamos en local antes de cargar remotos
+
+### iniciamos con test.. TDD
+- naming muy iporatnte para diferenciar
+pasamos de devliersRemote - deliveresPrimary
+
+### cada bez mas entendible TDD
+
+### stub now instes spy
+tests flexibles, para pasos contables
+
+EssentialApp/EssentialAppTests/Helpers/XCTestCase+MemoryLeakTracking.swift
 
 ==================================================
 ### Interception
