@@ -56,8 +56,12 @@ EssentialApp/EssentialAppTests/Helpers/XCTestCase+MemoryLeakTracking.swift
 - add new behaviour sin cambiar - decorators
 - compose types that conform common interface - composites
 
-### Interception
+The pattern’s intent is to “attach additional responsibilities to an object dynamically.
 
+### Interception
+RemoteFeedLoader.load method is a Query. - save method en otra parte
+save side-effect without altering existing components
+Decorator to intercept operations easily and alter/extend/inject new behavior into your system.
 
 ==================================================
 ### high level ui test / launch args
