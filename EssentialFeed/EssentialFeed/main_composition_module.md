@@ -46,6 +46,19 @@ EssentialApp/EssentialAppTests/Helpers/XCTestCase+MemoryLeakTracking.swift
 ==================================================
 ### Interception
 
+- Creamos new composite to intercept the load and inject the save
+- intercepting feedloaders
+
+### Decorating
+- add compartamiento a un tipo sin aleterar el tipo
+
+- create composables solutions throught abstractions
+- add new behaviour sin cambiar - decorators
+- compose types that conform common interface - composites
+
+### Interception
+
+
 ==================================================
 ### high level ui test / launch args
 
