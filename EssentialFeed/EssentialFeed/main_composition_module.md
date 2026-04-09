@@ -65,6 +65,47 @@ Decorator to intercept operations easily and alter/extend/inject new behavior in
 
 ==================================================
 ### high level ui test / launch args
+    
+Pruebas a alto nivel, donde se se ve la UI
+Probando la app directamente
+OJO estos son tardados, solo se prueba lo escencial
+No suelen ser muchos, puede tardar hasta horas    
+
+### interesante forma de checar UI
+    let app = XCUIApplication()
+    app.launchArguments = ["-reset", "-connectivity", "online"]
+    app.launch()
+    
+    let feedCells = app.cells.matching(identifier: "feed-image-cell")
+    XCTAssertEqual(feedCells.count, 2)
+    
+    let firstImage = app.images.matching(identifier: "feed-image-view").firstMatch
+    XCTAssertTrue(firstImage.exists)
+
+- creas XCUIApplication
+- launch
+- buscas celdas, checas data...
+
+- ojo launchArguments para definir si hay conectividad o no
+- reset para limpiar y hacer el test desde cero
+    - para esto hay que leer la bandera de reset y eliminar data
+
+### if debug
+if DEBUG
+    configuration.delegateClass = DebuggingSceneDelegate.self
+endif
+Para no poner codigo en prod    
+podemos crear archivos con todo el if debug    
+
+The DEBUG flag is automatically set for the Debug build configuration. But you can also create your own custom build flags.
+
+### ojo con netwokr
+no podemos depender del servidor o de la cantidad de data
+hacemos localserver, tests demos (imagenes demo creadsa al tiempo)
+
+### muuuy lentos
+acceptance criteria high level
+dos celdas, una imagen, casos muy especificos
 
 ==================================================
 ### fast integration tests
