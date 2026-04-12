@@ -10,22 +10,22 @@ import UIKit
 import EssentialFeed
 
 class DebuggingSceneDelegate: SceneDelegate {
-    override func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
-        
-        if CommandLine.arguments.contains("-reset") {
-            try? FileManager.default.removeItem(at: localStoreURL)
-        }
-        
-        super.scene(scene, willConnectTo: session, options: connectionOptions)
-    }
-    
-    override func makeRemoteClient() -> HTTPClient {
-        if let connectivity = UserDefaults.standard.string(forKey: "connectivity") {
-            return DebuggingHTTPClient(connectivity: connectivity)
-        }
-        return super.makeRemoteClient()
-    }
+//    override func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let _ = (scene as? UIWindowScene) else { return }
+//        
+//        if CommandLine.arguments.contains("-reset") {
+//            try? FileManager.default.removeItem(at: localStoreURL)
+//        }
+//        
+//        super.scene(scene, willConnectTo: session, options: connectionOptions)
+//    }
+//    
+//    override func makeRemoteClient() -> HTTPClient {
+//        if let connectivity = UserDefaults.standard.string(forKey: "connectivity") {
+//            return DebuggingHTTPClient(connectivity: connectivity)
+//        }
+//        return super.makeRemoteClient()
+//    }
 }
 
 private class DebuggingHTTPClient: HTTPClient {
