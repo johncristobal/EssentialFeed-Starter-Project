@@ -171,3 +171,16 @@ y al tratar reloadData, cuando estemos en 0, buscaria recargar una item que no e
 
 OJO
 - prueba que el bug existe, resuleve, refactor
+
+### didEndDisplayingCell
+didEndDisplayingCell se llama cuando una celda sale de la vista 
+aqui podemos llamar para cancelar expensive operations
+
+As the model is transitioning from 10 items to zero, every cell on screen will be removed from the view hierarchy. So UIKit will call didEndDisplayingCell for those rows.
+
+But we don't have items in the tableModel anymore
+
+### manterne referencia
+private var loadingItems = [IndexPath: Item]()
+
+
