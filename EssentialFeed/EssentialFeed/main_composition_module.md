@@ -162,3 +162,12 @@ assert para checar - aqui se ve si sale algo mal
 - perfoarmance: mas rapidos que ui tests
 - precision: validas detalles de vista, puede fallar
 
+==================================================
+### uitable events prevent crash
+
+Cuando recargamos feed, si el usuario eliminara un item
+pasamos de 0 a 2
+y al tratar reloadData, cuando estemos en 0, buscaria recargar una item que no existe
+
+OJO
+- prueba que el bug existe, resuleve, refactor
