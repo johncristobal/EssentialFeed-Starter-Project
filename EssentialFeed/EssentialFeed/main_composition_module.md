@@ -109,3 +109,56 @@ dos celdas, una imagen, casos muy especificos
 
 ==================================================
 ### fast integration tests
+
+the idea is to create a “Main module” responsible for instantiating and composing all independent modules in a centralized place, aka the “Composition Root.”
+
+In iOS apps, the application entry point historically has been the UIApplicationDelegate.didFinishLaunchingWithOptions.
+
+More recently, in single-window apps using the new UIScene APIs, the UISceneDelegate.willConnectToSession can be considered the app entry point.
+
+### @testable
+
+On the other hand, no other module should reference the SceneDelegate. So, it doesn’t have to be public. To enforce other modules to not have access to the Composition Root, you can make its components internal and, when necessary, use @testable import to test them.
+
+### Convenience initializers
+You can define a convenience initializer by placing the convenience modifier before the init keyword, separated by a space:
+
+convenience init(parameters) {
+    statements
+}
+
+### lazy properties in Swift
+whose initial value is not calculated until the first time they are used
+
+
+==================================================
+### validation UI with snapshots Tests
+
+Hacer checks with snapshots - validar que las vistas sean las mismas
+
+### create snapshots
+let renderer = UIGraphicsImageRenderer(bounds: bounds
+- para crear snapshot
+
+### snapspt con data
+Creamos data fake y mandamos llamar feecviewcontoller 
+    let cells: [FeedImageCellController] = stubs.map { stub in
+        let cellController = FeedImageCellController(delegate: stub)
+        stub.controller = cellController
+        return cellController
+    }
+    
+    display(cells)
+
+### INTRESANTE
+primero hace los records, y despues validamos que los records empatan con los nuevos 
+
+recors hastaque esten feliz con el resutlado  - add a git
+assert para checar - aqui se ve si sale algo mal
+- no hagas test de logica, solo de render
+
+### shortcoming
+- reliability: ojo con el tipo de dispositivo que usas para test
+- perfoarmance: mas rapidos que ui tests
+- precision: validas detalles de vista, puede fallar
+
