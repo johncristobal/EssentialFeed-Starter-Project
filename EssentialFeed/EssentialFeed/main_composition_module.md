@@ -183,4 +183,58 @@ But we don't have items in the tableModel anymore
 ### manterne referencia
 private var loadingItems = [IndexPath: Item]()
 
+==================================================
+### organaizng codebases - vertical/horizontal slicing
+
+ventaja de un codigo en modulos
+- puedes conectar otros modulos sin afectar los existentes, dada las dependencias y conexiones
+
+Onion architecture
+- center = core modules, interfaces
+- use cases, services, presentation - feed api, feed cache
+- infraestructure adapters - framework specific
+- infraestructure frameworks - uikit, sqlite, firebase, etc
+
+BUENISIMO
+separo en otr framework el api
+creo el framework, arrastro todo lo de api a ese framework EssentialFeedApi
+import el framework donde marcaba error
+listo
+la app separo otro modulo
+OJO
+esto crearias muchas carpetar, quiza un poco dificil de mantener
+SOLO separa cuando sea necesario, por features 
+
+TODO podria vivir en el mismo proyecto de la appios
+pero los tests correrian en el simuladto, => mas tiempo de tests
+
+POR TANTO
+la logica si podria vivir en platform agnostic
+y solo l ode ios en su propio proyceto
+separar en diferentes proyects, EssentialLogin, EssentialFeed
+
+### monolith - todo en el mismo proyecto
+para apps pequenas, todo esta en un solo lado, dificil de mantenetr
+
+### vertical slicigin
+separar features (login, feed) in separate targets, separate projects (workspace)
+_features separados, pero no se separa de losmodulos en el target_
+
+### horizontal slicing
+following dependencu inversion principle
+los modulos de arriba no conocer los de abajo
+_se separan los layers, pero no los features_
+
+### combine hor slicing within feature ver - La mejor opcion
+Core Feed feature domain - app logic - adapters - framework
+Login feateure domina  - app logic - adapters - framework
+
+mas flexibilidad, mas opciones de separar y agreagr tests
+
+Reference
+https://academy.essentialdeveloper.com/ios-lead-essentials/447455/resources/15169635
+para ver las iamgenes y mas contexto
+
+==================================================
+### CD - automating app to deploy
 
