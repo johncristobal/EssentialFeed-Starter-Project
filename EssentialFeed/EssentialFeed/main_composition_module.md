@@ -238,3 +238,16 @@ para ver las iamgenes y mas contexto
 ==================================================
 ### CD - automating app to deploy
 
+Delete main storryboard frm all places
+build settings - uikit main
+deplyment info
+delete file 
+info plis scene
+
+### github actions CD (continous delivery)
+provision files
+yamls
+push to master - depliy new build
+OJO, las llaves pueden ir cifradas 
+Interesante - el githur number puede ser random, o incremental
+(ver tutorial para esto)
