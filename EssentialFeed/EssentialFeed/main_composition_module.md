@@ -251,3 +251,21 @@ push to master - depliy new build
 OJO, las llaves pueden ir cifradas 
 Interesante - el githur number puede ser random, o incremental
 (ver tutorial para esto)
+
+==================================================
+### Combine
+map/handleEvents
+catch
+Future
+Deferred
+AnyPublisher
+
+Using Combine to compose your application in the Composition Root
+Future, Deferred, and AnyPublisher publishers
+map, handleEvents, catch, eraseToAnyPublisher, sink, and receive(on:) operators
+Cancellable
+
+- Some Design Patterns like the Composite, Adapter, and Decorator can be seamlessly replaced with universal abstractions from Mathematics and Category Theory.
+    -  The Combine framework by Apple provides us building blocks based on those universal abstractions
+
+
