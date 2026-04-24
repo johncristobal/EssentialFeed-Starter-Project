@@ -13,8 +13,8 @@ import Foundation
 // cambio 2
 //public typealias LoadFeedResult = Result<[FeedImage], Error>
 
-public protocol FeedLoader {
-    // cambio 3
-    typealias Result = Swift.Result<[FeedImage], Error>
-	func load(completion: @escaping (Result) -> Void)
-}
+//public protocol FeedLoader {
+//    // cambio 3
+//    typealias Result = Swift.Result<[FeedImage], Error>
+//	func load(completion: @escaping (Result) -> Void)
+//}
