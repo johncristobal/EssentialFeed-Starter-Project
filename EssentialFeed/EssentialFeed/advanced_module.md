@@ -19,3 +19,17 @@
 The RemoteFeedLoader and RemoteImageCommentsLoader implementations are identical apart from the mapping logic.
 
 ==============================
+### Presnetation
+
+Carga y error es lo mismo, se crea un module que comparte estp
+FeedPresneter => debe ser generic para feed, images, comments
+
+- typealias
+    public typealias Mapper = (Resource) throws -> View.ResourceViewModel
+Recuerda usarlos para simplificar nombres
+
+- file, line
+Para saber exactamente donde truena el codigo
+
+- inyectar locale, calendar
+Para contrlar el ambiente

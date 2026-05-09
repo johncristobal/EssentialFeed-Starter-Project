@@ -13,7 +13,6 @@ import Combine
 extension FeedUIIntegrationTests {
     class LoaderSpy: FeedImageDataLoader {
         
-//        private var feedRequests = [(FeedLoader.Result) -> Void]()
         private var feedRequests = [PassthroughSubject<[FeedImage], Error>]()
         
         var loadFeedCallCount: Int {
