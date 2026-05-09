@@ -62,11 +62,13 @@ final class FeedUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.simulateApperaance()
+        sut.tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 400)
         assertThat(sut, isRendering: [])
 
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
-
+        RunLoop.current.run(until: Date()+1)
+        
         sut.simulateUserInitiatedFeedReload()
         loader.completeFeedLoading(with: [image0, image1, image2, image3], at: 1)
         assertThat(sut, isRendering: [image0, image1, image2, image3])
@@ -78,9 +80,11 @@ final class FeedUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.simulateApperaance()
+        sut.tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 400)
         loader.completeFeedLoading(with: [image0, image1], at: 0)
         assertThat(sut, isRendering: [image0, image1])
-
+        RunLoop.current.run(until: Date()+1)
+        
         sut.simulateUserInitiatedFeedReload()
         loader.completeFeedLoading(with: [], at: 1)
         assertThat(sut, isRendering: [])
@@ -91,8 +95,10 @@ final class FeedUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.simulateApperaance()
+        sut.tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 400)
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
+        RunLoop.current.run(until: Date()+1)
         
         sut.simulateUserInitiatedFeedReload()
         loader.completeFeedLoadingWithError(at: 1)
