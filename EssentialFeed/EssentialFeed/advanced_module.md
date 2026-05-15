@@ -33,3 +33,12 @@ Para saber exactamente donde truena el codigo
 
 - inyectar locale, calendar
 Para contrlar el ambiente
+
+==============================
+### Reusable
+OJO
+cuando dejas un metodo vacio, violas IntegrationSegreationProtocol
+Estas obligando que una clase implementa algo que no necesitas
+
+
+

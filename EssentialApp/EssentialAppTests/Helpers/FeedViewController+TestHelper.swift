@@ -8,7 +8,14 @@
 import UIKit
 import EssentialFeediOS
 
-extension FeedViewController {
+extension ListViewController {
+    
+//    public override func loadViewIfNeeded() {
+//        super.loadViewIfNeeded()
+//        
+//        tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+//    }
+    
     func replaceRefreshingControlWithFakeiOS17Support() {
         let fake = FakeRefreshContol()
         refreshControl?.allTargets.forEach { target in
@@ -29,10 +36,10 @@ extension FeedViewController {
         tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
     }
 
-    func simulateApperaance() {
+    func simulateAppearance() {
         if !isViewLoaded {
             loadViewIfNeeded()
-            replaceRefreshingControlWithFakeiOS17Support()
+            prepareForFirstAppearance()
         }
         
         beginAppearanceTransition(true, animated: false)
@@ -46,6 +53,17 @@ extension FeedViewController {
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
+    }
+    
+    @discardableResult
+    func simulateFeedImageBecomingVisibleAgain(at row: Int) -> FeedImageCell? {
+        let view = simulateFeedImageViewNotVisible(at: row)
+        
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImagesSection)
+        delegate?.tableView?(tableView, willDisplay: view!, forRowAt: index)
+        
+        return view
     }
     
     @discardableResult
@@ -78,7 +96,8 @@ extension FeedViewController {
     }
     
     func numberOfRenderedFeedImageViews() -> Int {
-        return tableView.numberOfRows(inSection: feedImagesSection)
+//        return tableView.numberOfRows(inSection: feedImagesSection)
+        tableView.numberOfSections == 0 ? 0 :  tableView.numberOfRows(inSection: feedImagesSection)
     }
     
     func feedImageView(at row: Int) -> UITableViewCell? {
@@ -96,5 +115,13 @@ extension FeedViewController {
     
     func renderedFeedImageData(at index: Int) -> Data? {
         return simulateFeedImageViewVisible(at: index)?.renderedImage
+    }
+    
+    func simulateErrorViewTap() {
+        errorView.simulateTap()
+    }
+    
+    var errorMessage: String? {
+        return errorView.message
     }
 }
