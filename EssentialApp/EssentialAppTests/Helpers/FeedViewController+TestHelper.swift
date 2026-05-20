@@ -46,7 +46,7 @@ extension ListViewController {
         endAppearanceTransition()
     }
     
-    func simulateUserInitiatedFeedReload() {
+    func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }
     
@@ -108,10 +108,6 @@ extension ListViewController {
         let index = IndexPath(row: row, section: feedImagesSection)
         return ds?.tableView(tableView, cellForRowAt: index)
     }
-
-    private var feedImagesSection: Int {
-        return 0
-    }
     
     func renderedFeedImageData(at index: Int) -> Data? {
         return simulateFeedImageViewVisible(at: index)?.renderedImage
@@ -124,4 +120,13 @@ extension ListViewController {
     var errorMessage: String? {
         return errorView.message
     }
+    
+    
+    func simulateTapOnFeedImage(at row: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedImagesSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+    }
+    
+    private var feedImagesSection: Int { 0 }
 }

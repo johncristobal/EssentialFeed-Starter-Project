@@ -40,5 +40,21 @@ OJO
 cuando dejas un metodo vacio, violas IntegrationSegreationProtocol
 Estas obligando que una clase implementa algo que no necesitas
 
+==============================
+### Navigation
+
+Recuerda
+No queremos nodos conectados para navigation
+todo en un solo punto
+COMPOSITION root
+
+So when showing a view with complex dependencies, doing it directly via segues or code in the parent view is not the best approach
+
+- Instead, the composition should be done in the Composition Root
+- With a Composer in place, you can then move the navigation between the Feed and Comments to the Composition Root leaving the two features agnostic of each other.
+
+
+
+
 
 
