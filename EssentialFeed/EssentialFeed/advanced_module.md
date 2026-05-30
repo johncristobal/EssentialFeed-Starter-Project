@@ -53,7 +53,30 @@ So when showing a view with complex dependencies, doing it directly via segues o
 - Instead, the composition should be done in the Composition Root
 - With a Composer in place, you can then move the navigation between the Feed and Comments to the Composition Root leaving the two features agnostic of each other.
 
+* Composition
+Desde aqui crea toda la estructura de composer, ui, etc y lanza el image comments
 
+==============================
+### pagination
+Interesante
+after/before key - mandamos parametro para que no se repita el elemento en caso que agregue mas
+itemX
+itemA
+itemB
+
+after_key{itemB.key}
+itmeC
+itemD
+
+We can avoid the nested operations by using zip:
+
+makeRemoteFeedLoader(after: last)
+  .zip(localFeedLoader.loadPublisher())
+  .map { (newItems, cachedItems) in
+      (cachedItems + newItems, newItems.last)
+  }
+  
+For example, you can use zip to combine a publisher that produces A with a publisher that produces B. The result will be a new publisher that produces a tuple (A, B).
 
 
 
