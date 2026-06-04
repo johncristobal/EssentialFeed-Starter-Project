@@ -78,6 +78,35 @@ makeRemoteFeedLoader(after: last)
   
 For example, you can use zip to combine a publisher that produces A with a publisher that produces B. The result will be a new publisher that produces a tuple (A, B).
 
+==============================
+### logging
+
+Apple recommends you use the unified logging system via the os_log functions (iOS 10+) or the Logger struct (iOS 14+) from the os framework.
+
+### assertionFailure vs print
+• In debug builds, calling assertionFailure("message") will stop the program’s execution (it raises a breakpoint), making it easy for you to find and fix logic errors during development.
+• print Does not stop the program or trigger a breakpoint
+
+### Logging as a cross-cutting concern
+The Decorator pattern is one effective way of adding the logging behavior through polymorphism.
+Con un decorator, podemos poner un log desde un nivel mas alto sin poner logs en todos lados 
+
+When using Combine or similar frameworks, it can be even simpler. You can add the logging behavior directly into the publisher chain with the HandleEvents publisher.
+Si usas combine, puedes usar el handelEvents para log
+
+Conclusion:
+Either way, we recommend you inject this behavior in the Main application module instead of polluting all your components with logging responsibility. This way, the modules will remain decoupled from the logging responsibility and libraries. You can then easily replace those libraries with other implementations when needed.
+
+### optimizations
+Guardar bateria y uso de datos 
+- imagenes en una app donde no hace falta cargar todo de nuevo
+    - se guardan imagenes en cache
+    
+
+### nullobject
+“A null object is an object with no referenced value or with defined neutral ("null") behavior.”—Wikipedia
+
+
 
 
 
