@@ -106,7 +106,21 @@ Guardar bateria y uso de datos
 ### nullobject
 “A null object is an object with no referenced value or with defined neutral ("null") behavior.”—Wikipedia
 
+==============================
+### async injection
 
+- ir quitando callbacks de las llamdas, hacerlos sincrono
+- este es async, tiene completion
+    func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void)
+- quitamos completion y lo hacemos sinc
+    func insert(_ data: Data, for url: URL) throws
 
+- dispatchgroup
+para lanzar tareas asincronas
 
+- generics
+    func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
+        let context = self.context
+        var result: Result<R, Error>!
+para devolver el tipo que se necesita
 
