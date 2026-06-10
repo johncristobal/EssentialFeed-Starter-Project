@@ -47,17 +47,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            imageLoader: makeLocalImageLoaderWithRemoteFallback,
            selection: showComments))
 
-    private lazy var scheduler: AnyDispatchQueueScheduler = DispatchQueue(
+//    private lazy var scheduler: AnyDispatchQueueScheduler = DispatchQueue(
+//            label: "com.essentialdeveloper.infra.queue",
+//            qos: .userInitiated,
+//            attributes: .concurrent
+//        ).eraseToAnyScheduler()
+    private lazy var scheduler: AnyDispatchQueueScheduler = {
+        if let store = store as? CoreDataFeedStore {
+            return .scheduler(for: store)
+        }
+        
+        return DispatchQueue(
             label: "com.essentialdeveloper.infra.queue",
             qos: .userInitiated,
             attributes: .concurrent
         ).eraseToAnyScheduler()
+    }()
 
-    convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore, scheduler: AnyDispatchQueueScheduler) {
+    convenience init(httpClient: HTTPClient, store: FeedStore & FeedImageDataStore) {
         self.init()
         self.httpClient = httpClient
         self.store = store
-        self.scheduler = scheduler
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
