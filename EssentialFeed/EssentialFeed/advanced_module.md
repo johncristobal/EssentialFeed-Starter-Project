@@ -109,6 +109,9 @@ Guardar bateria y uso de datos
 ==============================
 ### async injection
 
+That's why it’s desired to run such infrastructure operations asynchronously - without blocking clients.
+making all APIs synchronous, and dealing with async and threading details in the Composition Root.
+
 - ir quitando callbacks de las llamdas, hacerlos sincrono
 - este es async, tiene completion
     func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void)
@@ -116,7 +119,7 @@ Guardar bateria y uso de datos
     func insert(_ data: Data, for url: URL) throws
 
 - dispatchgroup
-para lanzar tareas asincronas
+para lanzar tareas asincronas, uso DEMO para refafctor code
 
 - generics
     func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
@@ -124,3 +127,10 @@ para lanzar tareas asincronas
         var result: Result<R, Error>!
 para devolver el tipo que se necesita
 
+* In this example, cache operations that query a database will run in a background queue, but clients will receive values in the main queue.
+
+- Recomienda
+    * infra abstraccion sync
+    * async en composition root
+    
+    
