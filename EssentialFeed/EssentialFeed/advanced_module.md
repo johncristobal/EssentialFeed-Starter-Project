@@ -129,8 +129,13 @@ para devolver el tipo que se necesita
 
 * In this example, cache operations that query a database will run in a background queue, but clients will receive values in the main queue.
 
+- - -
+Subimos el perfom call un nivel arriba, mejores practicas    
+
 - Recomienda
     * infra abstraccion sync
     * async en composition root
-    
+
+Because many apps don’t have a proper Composition Root, they need to handle async details everywhere.
+
     
