@@ -12,6 +12,8 @@ import Combine
 import EssentialApp
 
 extension FeedUIIntegrationTests {
+    
+    @MainActor
     class LoaderSpy {
         
         private var feedRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()

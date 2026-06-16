@@ -8,16 +8,17 @@
 import XCTest
 import EssentialFeed
 
+@MainActor
 class EssentialFeedCacheIntegrationTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         
         setupEmptyStoreState()
     }
     
-    override func tearDown() {
-        super.tearDown()
+    override func tearDown() async throws {
+        try await super.tearDown()
         
         undoStoreSideEffects()
     }
@@ -104,7 +105,7 @@ class EssentialFeedCacheIntegrationTests: XCTestCase {
 
     // MARK: - Helpers
     private func makeFeedLoader(currentDate: Date = Date(), file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
-        let storeBundle = Bundle(for: CoreDataFeedStore.self)
+        _ = Bundle(for: CoreDataFeedStore.self)
         let storeURL = testSpecificStoreURL()
         let store = try! CoreDataFeedStore(storeURL: storeURL, contextQueue: .main)
         let sut = LocalFeedLoader(store: store, currentDate: { currentDate })

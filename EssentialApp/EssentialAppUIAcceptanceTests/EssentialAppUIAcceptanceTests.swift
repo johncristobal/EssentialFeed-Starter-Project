@@ -7,6 +7,7 @@
 
 import XCTest
 
+@MainActor
 class EssentialAppUIAcceptanceTests: XCTestCase {
     
     func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() {

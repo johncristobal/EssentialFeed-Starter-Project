@@ -8,6 +8,7 @@
 import XCTest
 import EssentialFeed
 
+@MainActor
 class CoreDataFeedImageDataStoreTests: XCTestCase {
     
     func test_retrieveImageData_deliversNotFoundWhenEmpty() throws {
@@ -53,7 +54,7 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
 
     // - MARK: Helpers
     
-    private func makeSUT(_ test: @escaping (CoreDataFeedStore) -> Void, file: StaticString = #file, line: UInt = #line) throws {
+    private func makeSUT(_ test: @Sendable @escaping (CoreDataFeedStore) -> Void, file: StaticString = #file, line: UInt = #line) throws {
         let storeURL = URL(fileURLWithPath: "/dev/null")
         let sut = try! CoreDataFeedStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)

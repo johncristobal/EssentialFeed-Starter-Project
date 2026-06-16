@@ -17,5 +17,5 @@ public protocol HTTPClient {
     typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
     
     @discardableResult
-    func get(from url: URL, completion: @escaping (Result) -> Void) -> HTTPClientTask
+    func get(from url: URL, completion: @Sendable @escaping (Result) -> Void) -> HTTPClientTask
 }

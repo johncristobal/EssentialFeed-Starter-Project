@@ -9,6 +9,7 @@ import XCTest
 import EssentialFeediOS
 @testable import EssentialApp
 
+@MainActor
 class SceneDelegateTests: XCTestCase {
     
     func test_sceneWillConnectToSession_configuresRootViewController() {
