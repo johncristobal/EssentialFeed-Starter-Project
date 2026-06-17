@@ -11,14 +11,14 @@ import EssentialFeed
 @MainActor
 class CoreDataFeedImageDataStoreTests: XCTestCase {
     
-    func test_retrieveImageData_deliversNotFoundWhenEmpty() throws {
-        try makeSUT { sut in
+    func test_retrieveImageData_deliversNotFoundWhenEmpty() async throws {
+        try await makeSUT { sut in
             expect(sut, toCompleteRetrievalWith: notFound(), for: anyURL())
         }
     }
     
-    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() throws {
-        try makeSUT { sut in
+    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() async throws {
+        try await makeSUT { sut in
             let url = URL(string: "http://a-url.com")!
             let nonMatchingURL = URL(string: "http://another-url.com")!
             
@@ -28,8 +28,8 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         }
     }
     
-    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() throws {
-        try makeSUT { sut in
+    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() async throws {
+        try await makeSUT { sut in
             let storedData = anyData()
             let matchingURL = URL(string: "http://a-url.com")!
             
@@ -39,8 +39,8 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
         }
     }
     
-    func test_retrieveImageData_deliversLastInsertedValue() throws {
-        try makeSUT { sut in
+    func test_retrieveImageData_deliversLastInsertedValue() async throws {
+        try await makeSUT { sut in
             let firstStoredData = Data("first".utf8)
             let lastStoredData = Data("last".utf8)
             let url = URL(string: "http://a-url.com")!
@@ -54,16 +54,14 @@ class CoreDataFeedImageDataStoreTests: XCTestCase {
 
     // - MARK: Helpers
     
-    private func makeSUT(_ test: @Sendable @escaping (CoreDataFeedStore) -> Void, file: StaticString = #file, line: UInt = #line) throws {
+    private func makeSUT(_ test: @Sendable @escaping (CoreDataFeedStore) -> Void, file: StaticString = #file, line: UInt = #line) async throws {
         let storeURL = URL(fileURLWithPath: "/dev/null")
         let sut = try! CoreDataFeedStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)
-        let exp = expectation(description: "wait for operation")
-        sut.perform {
+        
+        await sut.perform {
             test(sut)
-            exp.fulfill()
         }
-        wait(for: [exp], timeout: 0.1)
     }
 }
 

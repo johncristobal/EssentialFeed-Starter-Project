@@ -24,15 +24,33 @@ Mutex can replace non-compile-time-friendly synchronization techniques, such as 
 ================
 ### Swift continuations & tasks
 
-The New API
+- The New API
 func get(from url: URL) async throws -> (Data, HTTPURLResponse)
 
-y el cancel asi
+- y el cancel asi
 let task = Task {
     try await client.get(from: url)
 }
 task.cancel()
 
-ahora en vez de wait
+- ahora en vez de wait
 await fulfillment(of: [exp], timeout: 1.0)
 
+- protocolos de Apple a veces no incluyen el async, para ello
+Task.immediate {
+    await...
+}
+
+- Before:
+
+let exp = expectation(description: "wait for operation")
+sut.perform {
+    test(sut)
+    exp.fulfill()
+}
+wait(for: [exp], timeout: 0.1)
+After:
+
+await sut.perform {
+    test(sut)
+}
