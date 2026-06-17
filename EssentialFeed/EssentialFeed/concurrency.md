@@ -10,4 +10,29 @@ replace
     @MainActor
     class $1Tests
 
+Swift Concurrency (async/await) changes how concurrency and asynchrony are expressed, introducing a more linear and readable way to write asynchronous code
+
+UI modules (e.g., the iOS UI target) can default to @MainActor
+Non-UI or mixed modules should probably be nonisolated by default
+
+### @MainActor
+The @MainActor is a special global actor that ensures all annotated code runs on the main thread. 
+- developers relied on tools like DispatchQueue.main.async
+
+Mutex can replace non-compile-time-friendly synchronization techniques, such as DispatchQueues.
+
+================
+### Swift continuations & tasks
+
+The New API
+func get(from url: URL) async throws -> (Data, HTTPURLResponse)
+
+y el cancel asi
+let task = Task {
+    try await client.get(from: url)
+}
+task.cancel()
+
+ahora en vez de wait
+await fulfillment(of: [exp], timeout: 1.0)
 
