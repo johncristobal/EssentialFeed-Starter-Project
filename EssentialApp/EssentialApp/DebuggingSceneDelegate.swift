@@ -9,7 +9,7 @@
 import UIKit
 import EssentialFeed
 
-class DebuggingSceneDelegate: SceneDelegate {
+//class DebuggingSceneDelegate: SceneDelegate {
 //    override func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 //        guard let _ = (scene as? UIWindowScene) else { return }
 //        
@@ -26,7 +26,7 @@ class DebuggingSceneDelegate: SceneDelegate {
 //        }
 //        return super.makeRemoteClient()
 //    }
-}
+//}
 
 //private class DebuggingHTTPClient: HTTPClient {
 //    private class Task: HTTPClientTask {

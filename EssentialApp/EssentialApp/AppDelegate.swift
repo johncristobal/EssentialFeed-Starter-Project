@@ -25,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
         let configuration = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
                 
-        #if DEBUG
-        configuration.delegateClass = DebuggingSceneDelegate.self
-        #endif
+//        #if DEBUG
+//        configuration.delegateClass = DebuggingSceneDelegate.self
+//        #endif
         
         return configuration
     }
