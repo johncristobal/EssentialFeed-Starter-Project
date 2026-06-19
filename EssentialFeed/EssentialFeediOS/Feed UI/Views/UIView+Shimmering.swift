@@ -9,7 +9,6 @@ import UIKit
 
 extension UIView {
     public var isShimmering: Bool {
-//        return layer.mask?.animation(forKey: shimmerAnimationKey) != nil
         set {
             if newValue {
                 startShimmering()
@@ -19,12 +18,8 @@ extension UIView {
         }
         
         get {
-            return layer.mask?.animation(forKey: shimmerAnimationKey) != nil
+            layer.mask is ShimmeringLayer
         }
-    }
-    
-    private var shimmerAnimationKey: String {
-        return "shimmer"
     }
     
     private func startShimmering() {
