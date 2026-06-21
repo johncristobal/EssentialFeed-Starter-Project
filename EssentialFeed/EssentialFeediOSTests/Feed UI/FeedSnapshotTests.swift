@@ -132,6 +132,7 @@ private extension ListViewController {
     }
 }
 
+@MainActor
 private class ImageStub: FeedImageCellControllerDelegate {
     let viewModel: FeedImageViewModel
     let image: UIImage?

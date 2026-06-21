@@ -30,7 +30,7 @@ extension UIView {
         layer.mask = nil
     }
     
-    private class ShimmeringLayer: CAGradientLayer {
+    @MainActor private class ShimmeringLayer: CAGradientLayer {
         private var observer: Any?
         
         nonisolated override init() { super.init() }
