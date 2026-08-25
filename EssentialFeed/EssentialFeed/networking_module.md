@@ -26,7 +26,7 @@ Es muy raro tener Singletons, pasamos de esto a protocolos
 - Conforme vas avanzando, se va armando el protocolo
 
 ### Tip 3:
-Eliminamos singleton by DI
+**Eliminamos singleton by DI**
 Singletons deben tener buenas razones
 
 class RemoteFeedLoader {    
@@ -74,6 +74,15 @@ A spy records how it was used.
 - You want to verify a method was called
 - You want to check how many times it was called
 - You want to verify parameters passed
+- Usamos arrays para esto
+
+OJO con los states
+    public enum HTTPClientResult {
+        case success(HTTPURLResponse)
+        case failure(Error)
+    }
+
+- Con este, ya no jugamos con muchos states, solo con dos y su respectivo valor
 
 =============================================================
 #  Classicist TDD to map json + domain models
@@ -121,6 +130,14 @@ memory leak detection
 file: file, line: line
 Recuerda agregar estos para que cada error se refeleje en su metodo respectrivo
 
+### map
+agregamos funcion aparte para solo llamar en success
+funcion map (como el otro curso)
+
+### weak self
+guardl self != nil else {return}
+Ocupamos esto por si la instancia ya no esta, entonces ya no puede ejecutar lo demas
+
 =============================================================
 # modularity + enum patterns
 
@@ -145,22 +162,30 @@ Ya aprenderemos a usar este mas adelante
 # Four approaches
 
 ### end to end
-requieres la url, aun no tenemos
+requieres la url, aun no tenemos, ni backend
 
 ### Subclass vs Protocol...
 Subclass tnemos que usar la clase y nos preocupamos de los otros metodos
 URLSession - muchos metodos por override
 - can be dangerous when we subclass types we don’t own.
+- OJO,una cosa es crear el task y otra el resume task, dos test diferetnes
+    - aunque van ligados, pueden ser un solo test 
 
+### Protocols
 Con protocol, solo definimos la clase que ocupams y ya
 HttpSession - protocol custom y solo ocupampos ese metodo o metodos definidos en el prococol
 - we only have to implement and maintain specific methods we care about. 
 OJO
 - we introduce a lot of noise in our production code, as the protocols are created solely for testing purposes.
 
-### URLProtocol Stub (la preferida del progfe)
+### URLProtocol Stub (la preferida del profe)
 clase custom para tests url, http, https, ftp
 URL Loading System
+
+class func canInit(with:URLRequest) -> Bool
+class func canonicalRequest(for:URLRequest)
+func startLoading()
+func stopLoading()
 
 =============================================================
 # Speed up development
@@ -168,8 +193,26 @@ URL Loading System
 ### setUp and tearDown
 Metodos que se invocan al inicio y fin de cada test
 
+### validar todos los casos
+haces varios casos para que valides diferentes valores
+    XCTAssertNotNil(resultErrorFor(data: nil, response: nil, error: nil))
+    XCTAssertNotNil(resultErrorFor(data: nil, response: nonHTTPURLResponse(), error: nil))
+    XCTAssertNotNil(resultErrorFor(data: anyData(), response: nil, error: nil)) 
+
 ### duplicate code
+    private func resultErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
+        let result = resultFor(data: data, response: response, error: error, file: file, line: line)
+
+        switch result {
+        case let .failure(error):
+            return error
+        default:
+            XCTFail("Expected failure, got \(result) instead", file: file, line: line)
+            return nil
+        }
+    }
 Mucho ojo para cuando duplicas codigo
+- est ecodigo es el mismo para varios test, se manda la data, response y error
 - extension
 - helpers
 Nombres - deben ser claros y expresar lo que estas haciendo 
@@ -197,6 +240,9 @@ code coverage
 - Creamos nuevo TARGET para esto, para verificar tiempos exactos, mas precisos
     - no queremos todos los test corriendo aqui
     - desde main view, + target, test bundle
+    
+- agregar mensajes en los test, pata quesea mas claro
+    XCTAssertEqual(data, "mesaje")
     
 - OJO con el helper
 - Seleccionamos y en panel derecho agregamos a target nuvo

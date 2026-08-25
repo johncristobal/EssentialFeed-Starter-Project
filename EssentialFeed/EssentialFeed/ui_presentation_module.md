@@ -108,7 +108,6 @@ Dependency Inversion (DIP) and
 Single Responsibility (SRP). 
 Making sure to follow these guidelines will give you the freedom to extend your system with the minimum cost for changing it.
 
-
 ==================================================
 # Refactor massive VC - composers
 
@@ -122,9 +121,15 @@ FeedViewContrller:
 ### FeedRefreshViewController
 lazy var para inicializar contrl
 inyectamos dependencia - feedLoader
-enviamos closure para regresar data 
+**enviamos closure para regresar data** 
+
+### FeedImageCellController
+Enviamos model FeedImage
+imageLoader para obtener imagen url
+cellControllers para mandar a nil las instancias de task
 
 ### dependencias
+CREAR DEPENDENCIAS en el mismo contrller, puede no ser buena idea
 Al crear otros controllers para manejar refresh y cell, debemos manejar estos componentes en otro componente para que no crezca las deendencias 
 
 - podria sera un Factory, pero serian mas dependencia
@@ -145,6 +150,8 @@ Only Composers can use other Composers
 Este  componente crea el refresh y las celdas
 - crea un FeedViewContrller que piede ser llamado desde cualqueir lado
 
+Although tempting to use Composer types within your instances to create collaborators, you should use Dependency Injection instead. Only use Composers in the Composition Root to reduce coupling and prevent redundant dependencies!
+
 ==================================================
 # MVVM - reducing boilerplate / swift generics 
 
@@ -159,8 +166,8 @@ Model View Binder
 * podemos usar el ViewModel para multiples platforms
     * ViewModel no debe depender de UIKit
     
-* El ViewModel no tiene una referencia al view, como lo tiene el MVC
-    
+##**El ViewModel no tiene una referencia al view, como lo tiene el MVC**
+Aqui el tip es la manera de hacer bind con el viewmodel para separar referencias
     
 * tambien ayuda como capa para transformar data
 - Date a String 
@@ -183,7 +190,12 @@ Tmb
     . . .
     var onFeedLoad: Observer<[FeedImage]>?
 
-### generics
+### platforms agnostic
+Si un viewmodel tiene una referencia especifica  (UIImage, uikit, etc)
+Esto esta mal, entonces no es libre, quita esas dependencas . . .
+
+    -> generics
+
 final class FeedImageViewModel<Image> {
     
     private let imageTranformer: (Data) -> Image?
@@ -206,7 +218,7 @@ To decouple the Presentation layer from UIKit types, we defined a generic Image 
 MVC - controller tiene una referencia a la vista (fuerte)
 MVVM - el viewmodel notifica cambios a la vista (medio) - reactivo
 MVP 
-- el presenter tiene un protocolo que hace vista abstracta y coencta con el view - two way communicationg
+- el presenter tiene un **protocolo** que hace vista abstracta y coencta con el view - two way communicationg
 - tranformar data y la manda en un struct (viewmodel, viewdata)
 
 protocol FeedView {
@@ -223,6 +235,7 @@ final class FeedPresenter {
 - PERO OJO
 Deberia pasar viewmodel, en casi de agregar mas items, no rompes el protocol
 - solo guarda data
+- suelen llamarse ViewData o PresentableModel
 
 ### adapter
 Creamos capa para manejar un solo camino, no two wayss
@@ -244,12 +257,23 @@ protocol Eatable {
     func eat()
 }
 
+### Pasar closure en vez de clase
+feedView: Presenter
+X
+feedView: @escaping: () -> Void
+. . . -> (presenter.loadFeed)
+
+- Pasamos un closure para enviar el metodo, no  todo el presenter
+
 ==================================================
 # Storybard...
 
 Cambiamos del codigo al storyboard, ahora aqui se maneja los aoutles, no mas codigo
+- OJO, instansiamos el viewcontrolle desde composer, aqui es nustr nodo main
 
 - uirefresh vive en el stoyboard
+
+Cuidao con las listas, los contrllers se reutilizan
 
 ==================================================
 # String localized
@@ -268,6 +292,14 @@ You can access your Localized Strings via the Foundation Bundle APIs or NSLocali
     - retorna el valor de la llave si no tiene data 
     - o el value por defecto
 
+### names files
+- cambiamos de feed a feeduiintegration
+- porque checamos varios componenrts, items, title
+
+    MVC    MVVM    MVP
+String Creator    A presentation component or Controller/View    ViewModel    Presenter
+
+
 ==================================================
 # Decoration pattern
 
@@ -275,15 +307,16 @@ You can access your Localized Strings via the Foundation Bundle APIs or NSLocali
 }
 manejamos weak self para memory leak
 
-### presenter
+### presenter --- ❌
 para no andar repitieno codigo, el presenter puede ser mejor para manjear memoria y threads
 - OJO, el presenter es framework agnostic, UIkit y dispatch no entran, so
 
-### composer
+### composer --- ✅
 Aqui es el mejor ligar,pero ocupamos Decorator pattern
-OPEN CLOSE P 
+OPEN CLOSE PRINCIPLE
 - Agregmoas comportamiento a una instnacia manteniendo la interfaz
 - podemos hacerlo generic para cualqioer componente que ocupe threads
+    - por ejemplo tanto para el feed como feedimages
 
 EssentialFeed/EssentialFeediOS/Feed UI/Composers/FeedLoaderPresentationAdapter.swift
 

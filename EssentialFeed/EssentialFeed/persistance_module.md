@@ -14,6 +14,7 @@ Woooow, existe un URLCache ya definido, donde podemos guardar data de la session
 * Haremos un custom solution, no solo las default
 * en los test, mucho cuidado con el orden, pueden afectar tests
 
+=============================================================
 ### Aclarando requrimientos vs front design
 
 - Definir, tener buena comunicacion
@@ -29,7 +30,7 @@ Woooow, existe un URLCache ya definido, donde podemos guardar data de la session
     * hacer los requerimientos mas precisos
 
 =============================================================
-#  Decoupling business frmo logic framework
+### Decoupling business frmo logic framework
 
 - Separar business rules de frameworks - DependencyInversion
 ***
@@ -63,7 +64,12 @@ private class FeedStoreSpy: FeedStore {
 * Interface Segregation Principle (ISP): no client should be forced to depend on methods it does not use.
 
 =============================================================
-#  Modules
+###  Modules
+
+Modod de prevenir dealllocated data
+- if let self = self {
+
+}
 
 Controllers - what
 Frameworks - how
@@ -75,7 +81,7 @@ OJO
 Probamos cuando se inserta o se borra y el Loader se va a nil
 
 =============================================================
-#  Resolviendo el high-coupling - data transfer model
+###  Resolviendo el high-coupling - data transfer model
 
 Queremos componentes descentralizados 
 - Cada modelo para su dominio 
@@ -85,6 +91,7 @@ DTO = data transfer object
 - Creamos mappers para match models
 
 Creamos capas en caso que backend cambie 
+Thus, you should proactively set a boundary (also called anticorruption layer) to prevent external actors from accidentally influencing/damaging your roadmap. 
 
 - - -
 ### Alcance conformista
@@ -103,10 +110,13 @@ private Array extensions for translating/mapping between model representations
 testing only through the public interfaces:
 
 =============================================================
-# DRY principle, Tiny DSLs
+### DRY principle, Tiny DSLs
 
 Interesante: hace un duplciado de funcion, pero en un contexto diferente
 Podemos usar lo mismo para diferentes contextos
+
+### Como...
+hazlo que funcione, luego hazlo bien, reafctoer
 
 - este es el camino...
 sut.load { images, error 
@@ -149,7 +159,7 @@ Si el esceneario es menos de 7 dias...minimo
 Como devs, nos toca validar todo escenario => PRACTIVIDAD
 
 =============================================================
-# Separating queries
+### Separating queries
 
 ### weak self
 Usamos este para validar cuando la instnacia sea nula, temas de memoria
@@ -201,7 +211,7 @@ A simple way of looking at it is that of Getters (Query) and Setters (Command/Mo
 Load Cache (query) and Invalidate Cache If Needed (command).
 
 =============================================================
-# App-specific from app-agnostic
+### App-specific from app-agnostic
 
 ### separamos logica
 Creamos tests para validar unicamente y otros para el sideefffect
@@ -237,7 +247,7 @@ Domain model - describe aoo-agnostics business logic
     - core
     - son pequenos, pero de gran impacto
 
-###Frameowkrs
+### Frameowkrs
 Que el frameowkr NO HAGA NADA DEL NEGOCIO
 Mientras mas separes codigo, mas simple de manejar
 Solo debe hacer lo simple = fetch, stre, download
@@ -294,6 +304,8 @@ Logica del negocio - high level
 - LocalFeedLoader = core logic 
 
 Limite del circulo = habilita la dependency inversion entre el core logic y FeedStore implementation
+https://academy.essentialdeveloper.com/ios-lead-essentials/447455/resources/9858190
+    - El limite permite a componentes altos y bajos comuinicarse sin saber unop del otro
 
 - Ejemplo
 class UserViewModel {
@@ -303,6 +315,7 @@ class UserViewModel {
 protocol UserService {
     func fetchUsers() -> [String]
 }
+
 - Definimos el service
 class ApiService: UserService {
     func fetchUsers() -> [String] {
@@ -372,8 +385,8 @@ En los tests, al ejecutar uno, altera la app y puede que otro test ya no pase
 setup se llama antes de cada test
 teardown despues de cada test
 
-
 ### inyect param
+Construcntuon inyection
 Pasar el url como param nos ayuda a que otros usuarios puedan probar esta parte, usando cada uno su pripoia url
 
 
