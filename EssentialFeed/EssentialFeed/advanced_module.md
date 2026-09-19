@@ -33,12 +33,37 @@ Para saber exactamente donde truena el codigo
 
 - inyectar locale, calendar
 Para contrlar el ambiente
+- OJO con usar calendario gregorian para uso global, sin importar zona
 
 ==============================
 ### Reusable
 OJO
 cuando dejas un metodo vacio, violas IntegrationSegreationProtocol
 Estas obligando que una clase implementa algo que no necesitas
+
+- Usamos eztension para que los metodos que no ocupa, se queden aqui
+
+- ojo con typealias y IntegrationSegreationProtocol
+con el & - debemos implementar todo
+mejor con tuple (a,b,c) dejamos opcione libre a implementar
+Mejor aun
+struct Cellcontrler {
+    let datasource,
+    let delegate
+    . . .
+}
+
+Swiftui
+en este caso, podemos tomar screenshots del preview y hacer tests
+
+- ARC - ojo con strong references
+- uso de weak para cuando hay un retain cycle, que no se mantenga la referencia
+- cuidado con los tableview, al quere llamar algo que en una celda ya no este, la celda desaparece pero se quiso llamar a algo todavia
+
+* OJO fonts
+- se deben colcoar fonts de tal manera que si el usuaior las hace grandes, se debden ver grandes en pantalla
+    - usa .body, title, subhead, etc - los definios por apple
+
 
 ==============================
 ### Navigation
