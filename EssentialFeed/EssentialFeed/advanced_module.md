@@ -64,22 +64,32 @@ en este caso, podemos tomar screenshots del preview y hacer tests
 - se deben colcoar fonts de tal manera que si el usuaior las hace grandes, se debden ver grandes en pantalla
     - usa .body, title, subhead, etc - los definios por apple
 
-
 ==============================
 ### Navigation
-
-Recuerda
-No queremos nodos conectados para navigation
-todo en un solo punto
-COMPOSITION root
+No queremos nodos conectados para navigation, todo en un solo punto => COMPOSITION root
+* OJO, si tienes la informacion (lista de comments) puedes navegar directamente
+- Aqui no es el casi, por las dependencias que hay
 
 So when showing a view with complex dependencies, doing it directly via segues or code in the parent view is not the best approach
-
 - Instead, the composition should be done in the Composition Root
 - With a Composer in place, you can then move the navigation between the Feed and Comments to the Composition Root leaving the two features agnostic of each other.
-
 * Composition
 Desde aqui crea toda la estructura de composer, ui, etc y lanza el image comments
+
+### Endpoints
+Mejor tener la info del endpoint en su modulo respectivo
+```swift
+public enum ImageCommentsEndpoint {
+    case get(UUID)
+    
+    public func url(baseURL: URL) -> URL {
+        switch self {
+        case let .get(id):
+            return baseURL.appendingPathComponent("/v1/image/\(id)/comments")
+        }
+    }
+}
+```
 
 ==============================
 ### pagination
