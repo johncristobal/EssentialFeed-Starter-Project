@@ -44,3 +44,38 @@ Assets - images, colors
 info.plist - settings
 products
 frameworks
+
+=================================
+### Optimizing builds
+#### Bitcode
+Que se puede compilar bajo demanda
+
+#### Build active architecture
+Activo solo para debug - optimiza para el simulador nadamas, mas rapido
+No - release - crea app para cualquier dispositivo, mas lento
+
+### dSYM
+Debug symbols 
+
+#### Enable previews
+Util para swiftui 
+#### Enable testability
+Config util para tests
+
+#### iOS deployment target
+minimum os para ios 
+En versiones anteriores, cosas pueden no estar activas (fechas, uuid, logger, etc)
+Si vas a versiones diferentes - ifAvailable tienes que colocar en tu codigo
+
+
+#### Optimize binaries
+as
+
+
+
+
+
+
+
+
+
