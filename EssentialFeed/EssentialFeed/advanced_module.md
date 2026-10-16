@@ -1,4 +1,4 @@
-#  Advanced module
+**a**Advanced module
 
 ### Image Comments API
 
@@ -98,20 +98,41 @@ after/before key - mandamos parametro para que no se repita el elemento en caso 
 itemX
 itemA
 itemB
-
+En el param, mandamos el id donde querramos seguir, asi la lista no se descontinua
 after_key{itemB.key}
 itmeC
 itemD
 
-We can avoid the nested operations by using zip:
+### ListViewController
+Es un controller generico, para mostrar data e informacion
+- En este punto, el cargar mas info, sirve para feed pero no para comments
+- Es un error, ponerlo para los dos, por lo cual, aqui no estaria bien colocarlo
+- Solucion - Crear celda y colocarla debajo del contenido
 
+Para obtner info del backend, necistamos saber si hay mas data
+Creamos struct para obtener data y loadMore para saber si debemos llamar mas info
+```swift
+public struct Paginated<Item: Sendable>: Sendable {
+    
+    public let items: [Item]
+    public let loadMore: (@Sendable () async throws -> Self)?
+   
+ ```
+
+We can avoid the nested operations by using zip:
+```swift
 makeRemoteFeedLoader(after: last)
   .zip(localFeedLoader.loadPublisher())
   .map { (newItems, cachedItems) in
       (cachedItems + newItems, newItems.last)
   }
-  
+```
 For example, you can use zip to combine a publisher that produces A with a publisher that produces B. The result will be a new publisher that produces a tuple (A, B).
+
+### Remember
+* Paginacion para cuando tienes muchos items (ya viste dos opciones par aello)
+- cache en paginacion, cuidado con esto
+- reload cuando hay error, mostrar error - test
 
 ==============================
 ### logging
@@ -149,20 +170,37 @@ making all APIs synchronous, and dealing with async and threading details in the
 
 - ir quitando callbacks de las llamdas, hacerlos sincrono
 - este es async, tiene completion
-    func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void)
-- quitamos completion y lo hacemos sinc
-    func insert(_ data: Data, for url: URL) throws
+```swift
+func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void)
+```
+- quitamos completion y lo hacemos sync (usamos throws y reutnr data
+```swift
+func insert(_ data: Data, for url: URL) throws
+```
+
+availalable - para cuando quieres deprecated un codigo 
+```swift
+@availabe(\*, deprecated)
+```
 
 - dispatchgroup
 para lanzar tareas asincronas, uso DEMO para refafctor code
 
 - generics
-    func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
-        let context = self.context
-        var result: Result<R, Error>!
+```swift
+func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
+let context = self.context
+var result: Result<R, Error>!
+```
 para devolver el tipo que se necesita
 
+\* performAndAwait
+Metodo en core data para esperar resultados y no depender de completions escaping
 * In this example, cache operations that query a database will run in a background queue, but clients will receive values in the main queue.
+
+##### Combine
+.subscribe(on: ) -> lo que viene 
+.receive(on: ) -> donde se manda
 
 - - -
 Subimos el perfom call un nivel arriba, mejores practicas    
